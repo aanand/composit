@@ -1,0 +1,10 @@
+{
+  "name": "composit",
+  "version": "0.0.0",
+  "dependencies": {
+    "express": "",
+    "jade": "",
+    "stitch": "~> 0.3.3",
+    "coffee-script": "~> 1.3.1"
+  }
+}

@@ -1,0 +1,14 @@
+doctype html
+
+html
+  head
+    title composit
+  body
+    input.search(type='text', placeholder='Enter a search term')
+    .images
+    canvas.render
+
+    script(src='/vendor/sugar.js')
+    script(src='/vendor/jquery.js')
+    script(src='/application.js')
+    script require('composit').start();
