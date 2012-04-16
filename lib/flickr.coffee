@@ -6,6 +6,7 @@ exports.search = (query, callback) ->
     format: 'json'
     method: 'flickr.photos.search'
     media: 'photos'
+    sort: 'interestingness-desc'
     text: query
 
   $.getJSON url, params, (data) ->
