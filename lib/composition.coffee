@@ -1,11 +1,17 @@
 class Composition
-  @fromImage: (image) ->
-    new Composition(image, 1)
-
-  @compose: (components, width, height) ->
+  @fromImage: (image, width, height) ->
     canvas = document.createElement('canvas')
-    canvas.width = width
+    canvas.width  = width
     canvas.height = height
+
+    canvas.getContext('2d').drawImage(image, (width-image.width)/2, (height-image.height)/2)
+
+    new Composition(canvas, 1)
+
+  @compose: (components) ->
+    canvas = document.createElement('canvas')
+    canvas.width  = components[0].canvas.width
+    canvas.height = components[0].canvas.height
 
     ctx = canvas.getContext('2d')
 
@@ -13,15 +19,15 @@ class Composition
 
     components.forEach (c) ->
       newWeight = c.weight + currentWeight
-      c.render(ctx, c.weight / newWeight, width, height)
+      c.render(ctx, c.weight / newWeight)
       currentWeight = newWeight
 
     new Composition(canvas, currentWeight)
 
-  constructor: (@image, @weight) ->
+  constructor: (@canvas, @weight) ->
 
-  render: (ctx, alpha, canvasWidth, canvasHeight) ->
+  render: (ctx, alpha) ->
     ctx.globalAlpha = alpha
-    ctx.drawImage(@image, (canvasWidth - @image.width)/2, (canvasHeight - @image.height)/2)
+    ctx.drawImage(@canvas, 0, 0)
 
 module.exports = Composition
