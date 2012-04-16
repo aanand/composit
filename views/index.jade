@@ -3,17 +3,22 @@ doctype html
 html
   head
     title composit
-    style
-      body { text-align: center; font-family: Helvetica, sans-serif; }
+    link(rel='stylesheet', href='/application.css')
   body
-    form.search
-      label(for='query') Search Flickr:
-      input(type='text', name='query')
-      button(type='submit') Go
-      .spinner
+    .container
+      form.search
+        label
+          | Search Flickr:
+          input(type='text', name='query')
+          button(type='submit') Go
 
-    canvas.render
-    .info
+      .render
+        .spinner
+        canvas
+
+      .info
+        | Number of images:
+        .num-images
 
     script(src='/vendor/sugar.js')
     script(src='/vendor/jquery.js')

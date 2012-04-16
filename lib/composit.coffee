@@ -2,18 +2,26 @@ Flickr = require('flickr')
 Compositor = require('compositor')
 
 exports.start = ->
+  $('.render, .info').hide()
+
   spinner = new Spinner()
-  canvas  = $('canvas.render')[0]
+  spinner.spin($(".spinner")[0])
+
+  canvas = $('.render canvas')[0]
 
   $('.search').submit (event) ->
     event.preventDefault()
-    spinner.spin($(this).find(".spinner")[0])
+
+    $('.render').fadeIn()
+    canvas.width = $('.render').width()
+    canvas.height = canvas.width
 
     query = $(this).find('*[name=query]').val()
-    compositor = new Compositor(canvas, 500, 500)
+    compositor = new Compositor(canvas)
 
     compositor.didRender = (numImages) ->
-      $('.info').text("#{numImages} images composited.")
+      $('.info').show()
+      $('.num-images').text("#{numImages}")
 
     Flickr.search query, (imageUrls) ->
       compositor.addImageUrls(imageUrls)

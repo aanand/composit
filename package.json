@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "",
     "jade": "",
+    "less": "",
     "stitch": "~> 0.3.3",
     "coffee-script": "~> 1.3.1"
   }

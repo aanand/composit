@@ -3,9 +3,9 @@ Composition = require('composition')
 class Compositor
   maxComponents: 10
 
-  constructor: (@canvas, @width, @height) ->
-    @canvas.width = @width
-    @canvas.height = @height
+  constructor: (@canvas) ->
+    @width = @canvas.width
+    @height = @canvas.height
     @components = []
 
   addImageUrls: (imageUrls) ->

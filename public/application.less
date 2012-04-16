@@ -1,0 +1,51 @@
+@import "./vendor/bootstrap/less/bootstrap.less";
+
+@gridColumns: 6;
+
+@render-padding: 4px;
+@render-border-width: 1px;
+
+.search, .info {
+  margin: 1em 0;
+}
+
+.search {
+  .form-inline;
+
+  text-align: center;
+
+  button {
+    .btn;
+    margin-left: 4px;
+  }
+}
+
+.render {
+  position: relative;
+  margin: auto;
+  padding: @render-padding;
+  border: @render-border-width solid #ddd;
+  .border-radius(4px);
+
+  canvas {
+    display: block;
+    width: auto;
+    height: auto;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+
+.info {
+  text-align: right;
+  padding-right: @render-padding + @render-border-width;
+  color: @grayLight;
+
+  div {
+    display: inline;
+  }
+}
