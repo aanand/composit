@@ -29,7 +29,7 @@ class Compositor
 
   render: ->
     topLevelComp = Composition.compose(@components, @width, @height)
-    topLevelComp.render(@canvas.getContext('2d'), 1.0)
+    topLevelComp.render(@canvas.getContext('2d'), 1.0, @width, @height)
 
     @didRender(topLevelComp.weight)
 

@@ -13,15 +13,15 @@ class Composition
 
     components.forEach (c) ->
       newWeight = c.weight + currentWeight
-      c.render(ctx, c.weight / newWeight)
+      c.render(ctx, c.weight / newWeight, width, height)
       currentWeight = newWeight
 
     new Composition(canvas, currentWeight)
 
   constructor: (@image, @weight) ->
 
-  render: (ctx, alpha) ->
+  render: (ctx, alpha, canvasWidth, canvasHeight) ->
     ctx.globalAlpha = alpha
-    ctx.drawImage(@image, 0, 0)
+    ctx.drawImage(@image, (canvasWidth - @image.width)/2, (canvasHeight - @image.height)/2)
 
 module.exports = Composition
