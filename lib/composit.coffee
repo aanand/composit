@@ -13,19 +13,23 @@ exports.start = ->
 
   $('.search').submit (event) ->
     event.preventDefault()
+    query = $(this).find('*[name=query]').val()
+    window.history.pushState(null, null, '?q=' + window.escape(query))
+    doSearch(query)
+
+  doSearch = (query) ->
+    console.log("doSearch(#{query})")
 
     spinner.spin(spinnerEl)
-    $('.render').fadeIn()
+    $('.render, .info').fadeIn()
+    $('.num-images').html('&nbsp;')
 
     canvas.width  = $('.render').width()
     canvas.height = canvas.width
 
-    query = $(this).find('*[name=query]').val()
-
     compositor = new Compositor(canvas)
 
     compositor.onRender = (numImages) ->
-      $('.info').show()
       $('.num-images').text("#{numImages} image#{if numImages != 1 then 's' else ''}")
 
     imageLoader.stop() if imageLoader
@@ -39,3 +43,15 @@ exports.start = ->
 
     Flickr.search query, (imageUrls) ->
       imageLoader.addImageUrls(imageUrls)
+
+  doSearchFromQueryString = ->
+    params = Object.fromQueryString(window.location.search)
+    query = params.q
+
+    if query
+      query = query.replace(/\+/g, ' ') # thanks, sugar.js
+      $('*[name=query]').val(query)
+      doSearch(query)
+
+  window.addEventListener('popstate', doSearchFromQueryString)
+
