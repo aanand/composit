@@ -6507,6 +6507,11 @@ a.thumbnail:hover {
 .search .hide {
   display: none;
 }
+@media (max-width: 320px) {
+  .search input[name='query'] {
+    width: 140px;
+  }
+}
 .search button {
   display: inline-block;
   *display: inline;
