@@ -1,5 +1,5 @@
 class ImageLoader
-  constructor: (@receiver) ->
+  constructor: ->
     @firstImageLoaded = false
 
   addImageUrls: (imageUrls) ->
@@ -7,10 +7,10 @@ class ImageLoader
       image = new Image
       image.src = url
       image.onload = =>
-        @receiver.addImage(image)
-
         unless @firstImageLoaded
-          @onLoadFirstImage()
+          @onLoadFirstImage(image) if @onLoadFirstImage
           @firstImageLoaded = true
+
+        @onLoadImage(image) if @onLoadImage
 
 module.exports = ImageLoader

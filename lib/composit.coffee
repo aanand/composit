@@ -33,5 +33,8 @@ exports.start = ->
     imageLoader.onLoadFirstImage = ->
       spinner.stop()
 
+    imageLoader.onLoadImage = (image) ->
+      compositor.addImage(image)
+
     Flickr.search query, (imageUrls) ->
       imageLoader.addImageUrls(imageUrls)
