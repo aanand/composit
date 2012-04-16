@@ -25,6 +25,6 @@ class Compositor
     topLevelComp = Composition.compose(@components)
     topLevelComp.render(@canvas.getContext('2d'), 1.0)
 
-    @didRender(topLevelComp.weight)
+    @onRender(topLevelComp.weight) if @onRender
 
 module.exports = Compositor

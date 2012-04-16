@@ -24,7 +24,7 @@ exports.start = ->
 
     compositor = new Compositor(canvas)
 
-    compositor.didRender = (numImages) ->
+    compositor.onRender = (numImages) ->
       $('.info').show()
       $('.num-images').text("#{numImages}")
 
