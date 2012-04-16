@@ -1,11 +1,11 @@
-Flickr = require('flickr')
+Flickr      = require('flickr')
 ImageLoader = require('image-loader')
-Compositor = require('compositor')
+Compositor  = require('compositor')
 
 exports.start = ->
   $('.render, .info').hide()
 
-  spinner = new Spinner()
+  spinner   = new Spinner()
   spinnerEl = $(".spinner")[0]
   spinner.spin(spinnerEl)
 
@@ -17,7 +17,7 @@ exports.start = ->
     spinner.spin(spinnerEl)
     $('.render').fadeIn()
 
-    canvas.width = $('.render').width()
+    canvas.width  = $('.render').width()
     canvas.height = canvas.width
 
     query = $(this).find('*[name=query]').val()
