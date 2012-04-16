@@ -18,8 +18,6 @@ exports.start = ->
     doSearch(query)
 
   doSearch = (query) ->
-    console.log("doSearch(#{query})")
-
     spinner.spin(spinnerEl)
     $('.render, .info').fadeIn()
     $('.num-images').html('&nbsp;')
@@ -58,7 +56,7 @@ exports.start = ->
 
   window.addEventListener 'popstate', (event) ->
     initialPop = !popped && (window.location.href == initialURL)
-    (console.log("ignoring initial pop"); return) if initialPop
+    return if initialPop
     doSearchFromQueryString()
 
   doSearchFromQueryString()
