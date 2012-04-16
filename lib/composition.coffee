@@ -4,7 +4,23 @@ class Composition
     canvas.width  = width
     canvas.height = height
 
-    canvas.getContext('2d').drawImage(image, (width-image.width)/2, (height-image.height)/2)
+    imageRatio  = image.width/image.height
+    canvasRatio = canvas.width/canvas.height
+
+    scaleWidth  = null
+    scaleHeight = null
+
+    if imageRatio > canvasRatio
+      scaleHeight = canvas.height
+      scaleWidth = scaleHeight * imageRatio
+    else
+      scaleWidth = canvas.width
+      scaleHeight = scaleWidth / imageRatio
+
+    x = (canvas.width-scaleWidth)/2
+    y = (canvas.height-scaleHeight)/2
+
+    canvas.getContext('2d').drawImage(image, x, y, scaleWidth, scaleHeight)
 
     new Composition(canvas, 1)
 
