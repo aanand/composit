@@ -1,25 +1,27 @@
 class Composition
-  constructor: (@canvas, @width, @height) ->
-    @canvas.width = @width
-    @canvas.height = @height
-    @images = []
+  @fromImage: (image) ->
+    new Composition(image, 1)
 
-  addImageUrls: (imageUrls) ->
-    imageUrls.forEach (url) =>
-      image = new Image
-      image.src = url
-      image.onload = =>
-        @images.push(image)
-        @render()
+  @compose: (components, width, height) ->
+    canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
 
-  render: ->
-    @canvas.width = @canvas.width
-    ctx = @canvas.getContext('2d')
+    ctx = canvas.getContext('2d')
 
-    for i in [0 ... @images.length]
-      ctx.globalAlpha = 1.0 / (i+1)
-      ctx.drawImage(@images[i], 0, 0)
+    currentWeight = 0
 
-    @didRender(@images.length)
+    components.forEach (c) ->
+      newWeight = c.weight + currentWeight
+      c.render(ctx, c.weight / newWeight)
+      currentWeight = newWeight
+
+    new Composition(canvas, currentWeight)
+
+  constructor: (@image, @weight) ->
+
+  render: (ctx, alpha) ->
+    ctx.globalAlpha = alpha
+    ctx.drawImage(@image, 0, 0)
 
 module.exports = Composition
