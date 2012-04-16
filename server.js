@@ -20,4 +20,4 @@ app.use(express.static(__dirname + '/public'));
 app.get('/application.js', package.createServer());
 app.set('view engine', 'jade')
 app.get('/', function(req, res) { res.render('index', {layout: false}) });
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
