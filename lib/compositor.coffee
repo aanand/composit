@@ -1,7 +1,7 @@
 Composition = require('composition')
 
 class Compositor
-  maxComponents: 8
+  maxComponents: 10
 
   constructor: (@canvas, @width, @height) ->
     @canvas.width = @width
