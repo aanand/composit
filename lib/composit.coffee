@@ -1,22 +1,8 @@
-$.fn.keypressWithDelay = (delay, callback) ->
-  this.each ->
-    timer = null
-    el = this
-
-    $(this).keypress (event) ->
-      window.clearTimeout(timer) if timer
-
-      cb = ->
-        timer = null
-        callback.call(el, event)
-
-      timer = window.setTimeout(cb, delay)
-
 exports.start = ->
-  $('.search').keypressWithDelay 500, ->
-    console.log "searching..."
+  $('.search').submit (event) ->
+    event.preventDefault()
 
-    query = $(this).val()
+    query = $(this).find('*[name=query]').val()
 
     url = 'http://api.flickr.com/services/rest/?jsoncallback=?'
     params =
@@ -31,5 +17,4 @@ exports.start = ->
 
       for photo in data.photos.photo
         imageUrl = "http://farm#{photo.farm}.staticflickr.com/#{photo.server}/#{photo.id}_#{photo.secret}.jpg"
-        console.log(imageUrl)
         $('<img/>').attr('src', imageUrl).appendTo(images)

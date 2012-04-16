@@ -4,8 +4,13 @@ html
   head
     title composit
   body
-    input.search(type='text', placeholder='Enter a search term')
+    form.search
+      label(for='query') Search Flickr:
+      input(type='text', name='query')
+      button(type='submit') Go
+
     .images
+
     canvas.render
 
     script(src='/vendor/sugar.js')
