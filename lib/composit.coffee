@@ -53,5 +53,12 @@ exports.start = ->
       $('*[name=query]').val(query)
       doSearch(query)
 
-  window.addEventListener('popstate', doSearchFromQueryString)
+  popped     = window.history.state?
+  initialURL = window.location.href
 
+  window.addEventListener 'popstate', (event) ->
+    initialPop = !popped && (window.location.href == initialURL)
+    (console.log("ignoring initial pop"); return) if initialPop
+    doSearchFromQueryString()
+
+  doSearchFromQueryString()
