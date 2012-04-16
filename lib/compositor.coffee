@@ -17,7 +17,7 @@ class Compositor
       @components.unshift(Composition.compose([a, b]))
       @components = @components.sortBy((c) -> c.weight)
 
-    console.log "component weights: %s", @components.map((c) -> c.weight).join(", ")
+    # console.log "component weights: %s", @components.map((c) -> c.weight).join(", ")
 
     @render()
 
