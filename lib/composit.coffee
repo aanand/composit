@@ -9,6 +9,8 @@ exports.start = ->
   spinnerEl = $(".spinner")[0]
   spinner.spin(spinnerEl)
 
+  imageLoader = null
+
   canvas = $('.render canvas')[0]
 
   $('.search').submit (event) ->
@@ -28,6 +30,7 @@ exports.start = ->
       $('.info').show()
       $('.num-images').text("#{numImages}")
 
+    imageLoader.stop() if imageLoader
     imageLoader = new ImageLoader(compositor)
 
     imageLoader.onLoadFirstImage = ->
