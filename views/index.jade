@@ -8,6 +8,7 @@ html
       label(for='query') Search Flickr:
       input(type='text', name='query')
       button(type='submit') Go
+      .spinner
 
     .images
 
@@ -15,5 +16,6 @@ html
 
     script(src='/vendor/sugar.js')
     script(src='/vendor/jquery.js')
+    script(src='/vendor/spin.js')
     script(src='/application.js')
     script require('composit').start();

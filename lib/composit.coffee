@@ -1,4 +1,6 @@
 exports.start = ->
+  spinner = new Spinner()
+
   $('.search').submit (event) ->
     event.preventDefault()
 
@@ -12,9 +14,13 @@ exports.start = ->
       media: 'photos'
       text: query
 
+    spinner.spin($(this).find(".spinner")[0])
+
     $.getJSON url, params, (data) ->
       images = $('.images').empty()
 
       for photo in data.photos.photo
         imageUrl = "http://farm#{photo.farm}.staticflickr.com/#{photo.server}/#{photo.id}_#{photo.secret}.jpg"
         $('<img/>').attr('src', imageUrl).appendTo(images)
+
+      spinner.stop()
