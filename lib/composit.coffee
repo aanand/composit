@@ -1,4 +1,5 @@
 Flickr = require('flickr')
+ImageLoader = require('image-loader')
 Compositor = require('compositor')
 
 exports.start = ->
@@ -20,12 +21,17 @@ exports.start = ->
     canvas.height = canvas.width
 
     query = $(this).find('*[name=query]').val()
+
     compositor = new Compositor(canvas)
 
     compositor.didRender = (numImages) ->
       $('.info').show()
       $('.num-images').text("#{numImages}")
 
-    Flickr.search query, (imageUrls) ->
-      compositor.addImageUrls(imageUrls)
+    imageLoader = new ImageLoader(compositor)
+
+    imageLoader.onLoadFirstImage = ->
       spinner.stop()
+
+    Flickr.search query, (imageUrls) ->
+      imageLoader.addImageUrls(imageUrls)

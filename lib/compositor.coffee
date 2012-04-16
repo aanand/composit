@@ -8,12 +8,6 @@ class Compositor
     @height = @canvas.height
     @components = []
 
-  addImageUrls: (imageUrls) ->
-    imageUrls.forEach (url) =>
-      image = new Image
-      image.src = url
-      image.onload = => @addImage(image)
-
   addImage: (image) ->
     @components.unshift(Composition.fromImage(image, @width, @height))
 
