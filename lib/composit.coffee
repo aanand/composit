@@ -28,7 +28,7 @@ exports.start = ->
 
     compositor.onRender = (numImages) ->
       $('.info').show()
-      $('.num-images').text("#{numImages}")
+      $('.num-images').text("#{numImages} image#{if numImages != 1 then 's' else ''}")
 
     imageLoader.stop() if imageLoader
     imageLoader = new ImageLoader(compositor)
