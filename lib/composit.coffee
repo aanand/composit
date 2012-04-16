@@ -5,14 +5,17 @@ exports.start = ->
   $('.render, .info').hide()
 
   spinner = new Spinner()
-  spinner.spin($(".spinner")[0])
+  spinnerEl = $(".spinner")[0]
+  spinner.spin(spinnerEl)
 
   canvas = $('.render canvas')[0]
 
   $('.search').submit (event) ->
     event.preventDefault()
 
+    spinner.spin(spinnerEl)
     $('.render').fadeIn()
+
     canvas.width = $('.render').width()
     canvas.height = canvas.width
 
