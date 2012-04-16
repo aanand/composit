@@ -13,11 +13,11 @@ html
           input(type='text', name='query')
           button(type='submit') Go
 
-      .render
+      .render(style='display:none')
         .spinner
         canvas
 
-      .info
+      .info(style='display:none')
         .num-images
 
     script(src='/vendor/sugar.js')

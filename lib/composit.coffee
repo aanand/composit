@@ -3,8 +3,6 @@ ImageLoader = require('image-loader')
 Compositor  = require('compositor')
 
 exports.start = ->
-  $('.render, .info').hide()
-
   spinner   = new Spinner()
   spinnerEl = $(".spinner")[0]
   spinner.spin(spinnerEl)
