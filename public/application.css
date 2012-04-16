@@ -139,7 +139,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 13px;
   line-height: 18px;
   color: #333333;
@@ -443,7 +443,7 @@ a:hover {
 }
 p {
   margin: 0 0 9px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
@@ -740,7 +740,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 label {
   display: block;
@@ -6486,6 +6486,21 @@ a.thumbnail:hover {
   .thumbnails > li {
     margin-left: 30px;
   }
+}
+h1 {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 96px;
+  line-height: 96px;
+}
+@media (max-width: 320px) {
+  h1 {
+    font-size: 48px;
+    line-height: 48px;
+  }
+}
+.description {
+  margin: 40px 0;
 }
 .search,
 .info {

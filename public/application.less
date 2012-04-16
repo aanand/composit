@@ -2,9 +2,26 @@
 @import "./vendor/bootstrap/less/responsive.less";
 
 @gridColumns: 6;
+@baseFontFamily: 'Lato', sans-serif;
 
 @render-padding: 4px;
 @render-border-width: 1px;
+
+h1 {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 96px;
+  line-height: 96px;
+
+  @media(max-width: 320px) {
+    font-size: 48px;
+    line-height: 48px;
+  }
+}
+
+.description {
+  margin: 40px 0;
+}
 
 .search, .info {
   margin: 1em 0;
