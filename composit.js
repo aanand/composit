@@ -136,6 +136,42 @@
 
 }).call(this);
 
+}, "throttler": function(exports, require, module) {
+(function() {
+  var Throttler,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  Throttler = (function() {
+
+    Throttler.name = 'Throttler';
+
+    function Throttler(delay) {
+      this.delay = delay;
+      this.emit = __bind(this.emit, this);
+
+      this.queue = [];
+      this.interval = window.setInterval(this.emit, this.delay);
+    }
+
+    Throttler.prototype.write = function(object) {
+      return this.queue.push(object);
+    };
+
+    Throttler.prototype.emit = function() {
+      var object;
+      if (object = this.queue.pop()) {
+        return this.onEmit(object);
+      }
+    };
+
+    return Throttler;
+
+  })();
+
+  module.exports = Throttler;
+
+}).call(this);
+
 }, "composition": function(exports, require, module) {
 (function() {
   var Composition;
@@ -252,11 +288,13 @@
 
 }, "composit": function(exports, require, module) {
 (function() {
-  var Compositor, Flickr, ImageLoader;
+  var Compositor, Flickr, ImageLoader, Throttler;
 
   Flickr = require('flickr');
 
   ImageLoader = require('image-loader');
+
+  Throttler = require('throttler');
 
   Compositor = require('compositor');
 
@@ -275,7 +313,7 @@
       return doSearch(query);
     });
     doSearch = function(query) {
-      var compositor;
+      var compositor, throttler;
       spinner.spin(spinnerEl);
       $('.render, .info').fadeIn();
       $('.num-images').html('&nbsp;');
@@ -289,10 +327,14 @@
         imageLoader.stop();
       }
       imageLoader = new ImageLoader(compositor);
+      throttler = new Throttler(100);
       imageLoader.onLoadFirstImage = function() {
         return spinner.stop();
       };
       imageLoader.onLoadImage = function(image) {
+        return throttler.write(image);
+      };
+      throttler.onEmit = function(image) {
         return compositor.addImage(image);
       };
       return Flickr.search(query, function(imageUrls) {

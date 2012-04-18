@@ -1,5 +1,6 @@
 Flickr      = require('flickr')
 ImageLoader = require('image-loader')
+Throttler   = require('throttler')
 Compositor  = require('compositor')
 
 exports.start = ->
@@ -33,10 +34,15 @@ exports.start = ->
     imageLoader.stop() if imageLoader
     imageLoader = new ImageLoader(compositor)
 
+    throttler = new Throttler(100)
+
     imageLoader.onLoadFirstImage = ->
       spinner.stop()
 
     imageLoader.onLoadImage = (image) ->
+      throttler.write(image)
+
+    throttler.onEmit = (image) ->
       compositor.addImage(image)
 
     Flickr.search query, (imageUrls) ->
