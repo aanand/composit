@@ -21,12 +21,10 @@ require 'guard/guard'
 module ::Guard
   class Slim < ::Guard::Guard
     def start
-      puts "start"
       run(all_paths) if options[:all_on_start]
     end
 
     def run_on_change(paths)
-      puts "run_on_change(#{paths})"
       run(paths)
     end
 
