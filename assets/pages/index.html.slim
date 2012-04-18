@@ -1,0 +1,46 @@
+doctype html
+
+html
+  head
+    title Composit
+    link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet'
+    link rel='stylesheet' href='application.css'
+    meta name='viewport' content='width=device-width, user-scalable=no'
+  body
+    .container
+      h1 Composit
+
+      form.search
+        label
+          ' Search Flickr:
+          input type='text' name='query'
+          button type='submit' Go
+
+      .render style='display:none'
+        .spinner
+        canvas
+
+      .info style='display:none'
+        .num-images
+
+      .description
+        p
+          ' A quick hack inspired by Pep Ventosa&rsquo;s
+          ' <a href="http://www.pepventosa.com/gallery.html?folio=the%20photographs&gallery=The%20Collective%20Snapshot">The Collective Snapshot</a>.
+          ' It just composites the 100 most interesting Flickr photos for any search term you give it.
+
+        p
+          ' Some fun ones to try:
+          ' <a href="/?q=big+ben">big ben</a>,
+          ' <a href="/?q=statue+of+liberty">statue of liberty</a>,
+          ' <a href="/?q=field">field</a>,
+          ' <a href="/?q=tropical+sunset">tropical sunset</a>,
+          ' <a href="/?q=passport+photo">passport photo</a>,
+          ' <a href="/?q=eye+macro">eye macro</a>,
+          ' <a href="/?q=instagram+earlybird">instagram earlybird</a>.
+
+        p
+          ' By <a href="http://aanandprasad.com">Aanand Prasad</a>, who is looking for work in London if you&rsquo;re up to something interesting.
+
+      script src='composit.js'
+      script require('composit').start();
