@@ -319,15 +319,12 @@
       $('.num-images').html('&nbsp;');
       canvas.width = $('.render').width();
       canvas.height = canvas.width;
-      compositor = new Compositor(canvas);
-      compositor.onRender = function(numImages) {
-        return $('.num-images').text("" + numImages + " image" + (numImages !== 1 ? 's' : ''));
-      };
       if (imageLoader) {
         imageLoader.stop();
       }
-      imageLoader = new ImageLoader(compositor);
+      imageLoader = new ImageLoader;
       throttler = new Throttler(100);
+      compositor = new Compositor(canvas);
       imageLoader.onLoadFirstImage = function() {
         return spinner.stop();
       };
@@ -336,6 +333,9 @@
       };
       throttler.onEmit = function(image) {
         return compositor.addImage(image);
+      };
+      compositor.onRender = function(numImages) {
+        return $('.num-images').text("" + numImages + " image" + (numImages !== 1 ? 's' : ''));
       };
       return Flickr.search(query, function(imageUrls) {
         return imageLoader.addImageUrls(imageUrls);

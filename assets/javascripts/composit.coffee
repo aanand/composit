@@ -26,15 +26,11 @@ exports.start = ->
     canvas.width  = $('.render').width()
     canvas.height = canvas.width
 
-    compositor = new Compositor(canvas)
-
-    compositor.onRender = (numImages) ->
-      $('.num-images').text("#{numImages} image#{if numImages != 1 then 's' else ''}")
-
     imageLoader.stop() if imageLoader
-    imageLoader = new ImageLoader(compositor)
 
-    throttler = new Throttler(100)
+    imageLoader = new ImageLoader
+    throttler   = new Throttler(100)
+    compositor  = new Compositor(canvas)
 
     imageLoader.onLoadFirstImage = ->
       spinner.stop()
@@ -44,6 +40,9 @@ exports.start = ->
 
     throttler.onEmit = (image) ->
       compositor.addImage(image)
+
+    compositor.onRender = (numImages) ->
+      $('.num-images').text("#{numImages} image#{if numImages != 1 then 's' else ''}")
 
     Flickr.search query, (imageUrls) ->
       imageLoader.addImageUrls(imageUrls)
