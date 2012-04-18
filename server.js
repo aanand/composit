@@ -14,10 +14,13 @@ express.compiler.compilers.less.compile = function(str, fn){
   }
 };
 
+var port = process.env.PORT || 3000;
 var app = express.createServer();
 app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] }));
 app.use(express.static(__dirname + '/public'));
 app.get('/application.js', package.createServer());
 app.set('view engine', 'jade')
 app.get('/', function(req, res) { res.render('index', {layout: false}) });
-app.listen(process.env.PORT || 3000);
+app.listen(port);
+
+console.log("Listening on port " + port);
