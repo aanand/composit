@@ -16,6 +16,7 @@ exports.start = ->
     event.preventDefault()
     query = $(this).find('*[name=query]').val()
     window.history.pushState(null, null, '?q=' + window.escape(query))
+    _gaq.push(['_trackPageview', window.location.pathname + window.location.search]) if window._gaq
     doSearch(query)
 
   doSearch = (query) ->

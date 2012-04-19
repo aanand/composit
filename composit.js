@@ -310,6 +310,9 @@
       event.preventDefault();
       query = $(this).find('*[name=query]').val();
       window.history.pushState(null, null, '?q=' + window.escape(query));
+      if (window._gaq) {
+        _gaq.push(['_trackPageview', window.location.pathname + window.location.search]);
+      }
       return doSearch(query);
     });
     doSearch = function(query) {
