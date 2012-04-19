@@ -299,16 +299,22 @@
   Compositor = require('compositor');
 
   exports.start = function() {
-    var canvas, doSearch, doSearchFromQueryString, imageLoader, initialURL, popped, spinner, spinnerEl;
+    var canvas, doSearch, doSearchFromQueryString, imageLoader, initialURL, input, popped, spinner, spinnerEl;
     spinner = new Spinner();
     spinnerEl = $(".spinner")[0];
     spinner.spin(spinnerEl);
     imageLoader = null;
     canvas = $('.render canvas')[0];
+    input = $('.search *[name=query]');
+    if (typeof Touch === 'object') {
+      $('.search button').click(function() {
+        return input.blur();
+      });
+    }
     $('.search').submit(function(event) {
       var query;
       event.preventDefault();
-      query = $(this).find('*[name=query]').val();
+      query = input.val();
       window.history.pushState(null, null, '?q=' + window.escape(query));
       if (window._gaq) {
         _gaq.push(['_trackPageview', window.location.pathname + window.location.search]);

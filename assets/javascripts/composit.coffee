@@ -11,10 +11,14 @@ exports.start = ->
   imageLoader = null
 
   canvas = $('.render canvas')[0]
+  input = $('.search *[name=query]')
+
+  if typeof Touch == 'object'
+    $('.search button').click -> input.blur()
 
   $('.search').submit (event) ->
     event.preventDefault()
-    query = $(this).find('*[name=query]').val()
+    query = input.val()
     window.history.pushState(null, null, '?q=' + window.escape(query))
     _gaq.push(['_trackPageview', window.location.pathname + window.location.search]) if window._gaq
     doSearch(query)
